@@ -99,6 +99,6 @@ def api_spotify_auth():
             "client_secret": os.environ.get('SPOTIFY_CLIENT_SECRET')
         }
 
-        r = requests.post()
+        r = requests.post(url, params)
 
-        return (r.text, r.status_code, r.headers.items())
+        return r.text
