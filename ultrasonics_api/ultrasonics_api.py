@@ -65,7 +65,7 @@ def api_spotify_auth_request():
         "client_id": os.environ.get('SPOTIFY_CLIENT_ID'),
         "response_type": "code",
         "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify_auth",
-        "state": uuid4()
+        "state": str(uuid4())
     }
 
     Spotify.valid_states.append(params["state"])
@@ -79,17 +79,26 @@ def api_spotify_auth_request():
 def api_spotify_auth():
     code = request.args.get("code", None)
     error = request.args.get("error", None)
-    state = request.args.get("state").strip("\"'")
+    state = request.args.get("state")
 
     if state not in Spotify.valid_states:
         return jsonify({
             "error": "State returned was not valid",
-            "states": Spotify.valid_states,
-            "state": state,
-            "check": state in Spotify.valid_states
         }), 500
 
     if error:
         return error
     else:
-        return code
+        url = "https://accounts.spotify.com/api/token"
+        
+        params = {
+            "grant_type": ,
+            "code": code,
+            "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify_auth",
+            "client_id": os.environ.get('SPOTIFY_CLIENT_ID'),
+            "client_secret": os.environ.get('SPOTIFY_CLIENT_SECRET')
+        }
+
+        r = requests.post()
+
+        return (r.text, r.status_code, r.headers.items())
