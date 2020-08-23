@@ -79,7 +79,7 @@ def api_spotify_auth_request():
 def api_spotify_auth():
     code = request.args.get("code", None)
     error = request.args.get("error", None)
-    state = request.args.get("state")
+    state = request.args.get("state").strip("\"'")
 
     if state not in Spotify.valid_states:
         return jsonify({
