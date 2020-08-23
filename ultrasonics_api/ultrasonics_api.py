@@ -15,9 +15,11 @@ import os
 from urllib.parse import urlencode
 
 import requests
+from . import core
 from flask import Blueprint, Response, jsonify, redirect, request
 
 bp = Blueprint('ultrasonics_api', __name__)
+limiter = core.limiter
 
 @bp.route('/api')
 def index():
@@ -53,9 +55,10 @@ def api_spotify(subpath):
     return r.json()
 
 @bp.route('/api/spotify_auth_request')
+@limiter.limit("2 per day")
 def api_spotify_auth_request():
     """
-    Spotify api proxy specifically for the app auth endpoint.
+    Requests authorisation from the Spotify API.
     """
     from uuid import uuid4
 
@@ -76,7 +79,11 @@ def api_spotify_auth_request():
 
 
 @bp.route('/api/spotify_auth')
+@limiter.exempt
 def api_spotify_auth():
+    """
+    Redirect endpoint from Spotify after authentication attempt.
+    """
     code = request.args.get("code", None)
     error = request.args.get("error", None)
     state = request.args.get("state")
@@ -88,6 +95,8 @@ def api_spotify_auth():
         return jsonify({
             "error": "State returned was not valid",
         }), 500
+
+    Spotify.valid_states.remove(state)
 
     url = "https://accounts.spotify.com/api/token"
     
