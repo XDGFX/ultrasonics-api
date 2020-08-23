@@ -8,7 +8,11 @@ Used as a proxy server to forward API requests to various services which require
 XDGFX, 2020
 """
 
-from flask import Blueprint, request, jsonify
+import os
+
+from flask import Blueprint, jsonify, request
+
+import requests
 
 bp = Blueprint('ultrasonics_api', __name__)
 
@@ -19,8 +23,23 @@ def index():
         "api_version": "v1"
     })
 
-@bp.route('/api/v1/spotify')
-def api_v1_spotify():
-    return jsonify({
-        "name": "spotify"
-    })
+@bp.route('/api/v1/spotify/<path:subpath>', methods=["GET", "POST", "PUT", "DELETE"])
+def api_v1_spotify(subpath):
+    """
+    Spotify API proxy. Adds a 
+    """
+    base_url = "https://api.spotify.com/"
+    url = base_url + subpath
+    method = request.method
+    params = {**request.values.to_dict()}
+
+    if method == "GET":
+        r = requests.get(url = url, params = params)
+    elif method == "POST":
+        r = requests.post(url = url, params = params)
+    elif method == "PUT":
+        r = requests.put(url = url, params = params)
+    elif method == "DELETE":
+        r = requests.delete(url = url, params = params)
+
+    return r.json()
