@@ -8,10 +8,19 @@ Used as a proxy server to forward API requests to various services which require
 XDGFX, 2020
 """
 
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 bp = Blueprint('ultrasonics_api', __name__)
 
-@bp.route('/')
-def hello_world():
-    return 'Hello, World!'
+@bp.route('/api')
+def index():
+    return jsonify({
+        "name": "ultrasonics_api",
+        "api_version": "v1"
+    })
+
+@bp.route('/api/v1/spotify')
+def api_v1_spotify():
+    return jsonify({
+        "name": "spotify"
+    })
