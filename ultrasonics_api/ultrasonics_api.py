@@ -92,7 +92,7 @@ def api_spotify_auth():
         url = "https://accounts.spotify.com/api/token"
         
         params = {
-            "grant_type": ,
+            "grant_type": "authorization_code",
             "code": code,
             "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify_auth",
             "client_id": os.environ.get('SPOTIFY_CLIENT_ID'),
