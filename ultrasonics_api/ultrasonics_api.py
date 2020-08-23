@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 
 """
-ultrasonics-api
+ultrasonics_api
 
 Used as a proxy server to forward API requests to various services which require private API keys.
 
 XDGFX, 2020
 """
 
-import os
-from flask import Flask
+from flask import Blueprint, request
 
-app = Flask(__name__)
-app.config.from_mapping(
-        SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev_key'
-    )
+bp = Blueprint('ultrasonics_api', __name__)
 
-@app.route('/')
+@bp.route('/')
 def hello_world():
     return 'Hello, World!'
