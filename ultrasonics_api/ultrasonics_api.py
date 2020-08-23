@@ -85,7 +85,8 @@ def api_spotify_auth():
         return jsonify({
             "error": "State returned was not valid",
             "states": Spotify.valid_states,
-            "state": state
+            "state": state,
+            "check": state in Spotify.valid_states
         }), 500
 
     if error:
