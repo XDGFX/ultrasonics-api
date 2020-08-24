@@ -140,12 +140,12 @@ def api_spotify_auth():
 
     url = "https://accounts.spotify.com/api/token"
 
-    params = {
+    data = {
         "grant_type": "authorization_code",
         "code": code,
         "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify_auth"
     }
 
-    r = requests.post(url=url, params=params, headers=Spotify.auth_headers())
+    r = requests.post(url=url, data=data, headers=Spotify.auth_headers())
 
     return r.text
