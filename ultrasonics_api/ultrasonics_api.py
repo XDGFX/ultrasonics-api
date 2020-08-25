@@ -100,6 +100,11 @@ def api_spotify_auth_request():
     Spotify.valid_states.append(params["state"])
     url = base_url + urlencode(params)
 
+    import time
+    while params["state"] not in Spotify.valid_states:
+        # For some reason, the class has not updated...
+        time.sleep(1)
+
     return redirect(url, 302)
 
 
@@ -131,20 +136,12 @@ def api_spotify_auth():
     if error:
         return error
 
-    error_counter = 0
-
-    import time
-    while state not in Spotify.valid_states:
-        # Sometimes Heroku will not update all
-        time.sleep(1)
-        error_counter += 1
-
-        if error_counter > 20:
-            return jsonify({
-                "error": "State returned was not valid",
-                "state": state,
-                "valid_states": Spotify.valid_states
-            }), 500
+    if state not in Spotify.valid_states:
+        return jsonify({
+            "error": "State returned was not valid",
+            "state": state,
+            "valid_states": Spotify.valid_states
+        }), 500
 
     Spotify.valid_states.remove(state)
 
