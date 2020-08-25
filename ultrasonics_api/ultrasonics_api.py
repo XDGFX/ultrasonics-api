@@ -81,7 +81,7 @@ def api_spotify(subpath):
 
 
 @bp.route('/api/spotify_auth_request')
-@limiter.limit("2 per day")
+# @limiter.limit("2 per day")
 def api_spotify_auth_request():
     """
     Requests authorisation from the Spotify API.
