@@ -2,8 +2,7 @@
 
 """
 ultrasonics_api
-
-Used as a proxy server to forward api requests to various services which require private api keys.
+Used as a proxy server for ultrasonics to forward api requests to various services which require private api keys.
 
 All api requests should be made to /api/<service>/<subpath>
 where <subpath> is the same as sending directly to the respective api.
@@ -38,7 +37,6 @@ def error_too_many_requests(e):
 
 
 class Spotify():
-
     valid_states = []
 
     def auth_headers():
@@ -63,6 +61,8 @@ def api_spotify(subpath):
     Spotify api proxy. Adds an app client secret key to all requests.
     If error 401 is returned, the access token must be renewed.
     """
+    # TODO implement some logic to only allow certain subpaths
+
     base_url = "https://api.spotify.com/"
     url = base_url + subpath
     method = request.method
@@ -118,8 +118,8 @@ def api_spotify_auth_renew():
     return r.json()
 
 
-@ bp.route('/api/spotify_auth')
-@ limiter.exempt
+@bp.route('/api/spotify_auth')
+@limiter.exempt
 def api_spotify_auth():
     """
     Redirect endpoint from Spotify after authentication attempt.
@@ -134,6 +134,8 @@ def api_spotify_auth():
     if state not in Spotify.valid_states:
         return jsonify({
             "error": "State returned was not valid",
+            "state": state,
+            "valid_states": Spotify.valid_states
         }), 500
 
     Spotify.valid_states.remove(state)
