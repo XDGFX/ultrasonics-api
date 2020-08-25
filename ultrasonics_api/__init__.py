@@ -2,8 +2,7 @@ import os
 
 from flask import Flask
 
-
-from . import ultrasonics_api, core
+from . import core, ultrasonics_api
 
 
 def create_app():

@@ -36,7 +36,7 @@ def error_too_many_requests(e):
     return "ultrasonics: Too many requests, try again later", 429
 
 
-class Spotify():
+class Spotify:
     valid_states = []
 
     def auth_headers():
@@ -99,11 +99,6 @@ def api_spotify_auth_request():
 
     Spotify.valid_states.append(params["state"])
     url = base_url + urlencode(params)
-
-    import time
-    while params["state"] not in Spotify.valid_states:
-        # For some reason, the class has not updated...
-        time.sleep(1)
 
     return redirect(url, 302)
 
