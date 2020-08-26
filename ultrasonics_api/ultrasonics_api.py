@@ -13,13 +13,16 @@ XDGFX, 2020
 import os
 from urllib.parse import urlencode
 
+import redis
 import requests
-from . import core
 from flask import Blueprint, Response, jsonify, redirect, request
+
+from . import core
 
 bp = Blueprint('ultrasonics_api', __name__)
 limiter = core.limiter
 
+r = redis.from_url(os.environ.get("REDIS_URL"))
 
 @bp.route('/api')
 def index():
@@ -37,9 +40,13 @@ def error_too_many_requests(e):
 
 
 class Spotify:
-    valid_states = []
+    def get_valid_states(self):
+        r.get('spotify_valid_states')
 
-    def auth_headers():
+    def set_valid_states(self, valid_states):
+        r.set('spotify_valid_states', valid_states)
+
+    def auth_headers(self):
         """
         Encode client_id and client_secret into required authorisation header.
         """
@@ -97,7 +104,10 @@ def api_spotify_auth_request():
         "state": str(uuid4())
     }
 
-    Spotify.valid_states.append(params["state"])
+    valid_states = Spotify.get_valid_states()
+    valid_states.append(params["state"])
+    Spotify.set_valid_states(valid_states)
+
     url = base_url + urlencode(params)
 
     return redirect(url, 302)
@@ -131,14 +141,18 @@ def api_spotify_auth():
     if error:
         return error
 
-    if state not in Spotify.valid_states:
+    valid_states = Spotify.get_valid_states()
+
+    if state not in valid_states:
         return jsonify({
             "error": "State returned was not valid",
             "state": state,
             "valid_states": Spotify.valid_states
         }), 500
 
-    Spotify.valid_states.remove(state)
+    # State was accepted, remove from database
+    valid_states.remove(state)
+    Spotify.set_valid_states(valid_states)
 
     url = "https://accounts.spotify.com/api/token"
 
