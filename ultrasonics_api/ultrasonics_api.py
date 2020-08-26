@@ -153,6 +153,6 @@ def api_spotify_auth():
         "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify_auth"
     }
 
-    r = requests.post(url=url, data=data, headers=Spotify.auth_headers())
+    r = requests.post(url=url, data=data, headers=Spotify().auth_headers())
 
     return r.text
