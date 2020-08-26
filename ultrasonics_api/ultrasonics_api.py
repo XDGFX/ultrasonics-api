@@ -40,11 +40,11 @@ def error_too_many_requests(e):
 
 
 class Spotify:
-    def get_valid_states(self):
-        r.get('spotify_valid_states')
+    def push_valid_state(self, state):
+        r.lpush('spotify_valid_states', state)
 
-    def set_valid_states(self, valid_states):
-        r.set('spotify_valid_states', valid_states)
+    def remove_valid_state(self, state):
+        return r.lrem('spotify_valid_states', 0, state)
 
     def auth_headers(self):
         """
@@ -104,9 +104,7 @@ def api_spotify_auth_request():
         "state": str(uuid4())
     }
 
-    valid_states = Spotify.get_valid_states()
-    valid_states.append(params["state"])
-    Spotify.set_valid_states(valid_states)
+    Spotify().push_valid_state(params["state"])
 
     url = base_url + urlencode(params)
 
@@ -141,18 +139,11 @@ def api_spotify_auth():
     if error:
         return error
 
-    valid_states = Spotify.get_valid_states()
-
-    if state not in valid_states:
+    # Try to remove from database, return error if not exist
+    if not Spotify().remove_valid_state(state):
         return jsonify({
-            "error": "State returned was not valid",
-            "state": state,
-            "valid_states": Spotify.valid_states
+            "error": "State returned was not valid"
         }), 500
-
-    # State was accepted, remove from database
-    valid_states.remove(state)
-    Spotify.set_valid_states(valid_states)
 
     url = "https://accounts.spotify.com/api/token"
 
