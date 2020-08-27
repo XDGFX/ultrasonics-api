@@ -19,13 +19,46 @@ from ultrasonics_api import core
 bp = Blueprint('spotify', __name__, url_prefix="/api/spotify")
 limiter = core.limiter
 
-r = redis.from_url(os.environ.get("REDIS_URL"))
+if os.environ.get("USE_REDIS").lower() in ["true", "1", "y", "yes"]:
+    # Do use redis for data storage
 
-def push_valid_state(state):
-    r.lpush('spotify_valid_states', state)
+    db = redis.from_url(os.environ.get("REDIS_URL"))
 
-def remove_valid_state(state):
-    return r.lrem('spotify_valid_states', 0, state)
+    def push_valid_state(state):
+        """
+        Add state to list of valid states.
+        """
+        db.lpush('spotify_valid_states', state)
+
+    def remove_valid_state(state):
+        """
+        Try to remove state from list of valid states.
+        Returns True if successful, else False.
+        """
+        return db.lrem('spotify_valid_states', 0, state)
+
+else:
+    # Don't use redis for data storage
+
+    valid_states = []
+
+    def push_valid_state(state):
+        """
+        Add state to list of valid states.
+        """
+        valid_states.append(state)
+
+    def remove_valid_state(state):
+        """
+        Try to remove state from list of valid states.
+        Returns True if successful, else False.
+        """
+        if state in valid_states:
+            valid_states.remove(state)
+            return True
+        else:
+            return False
+
 
 def auth_headers():
     """
@@ -102,7 +135,7 @@ def api_spotify_auth_renew():
     data = {**request.values.to_dict()}
     data["grant_type"] = "refresh_token"
 
-    r = requests.post(url=url, data=data, headers=Spotify.auth_headers())
+    r = requests.post(url=url, data=data, headers=auth_headers())
 
     return r.json()
 
@@ -112,6 +145,7 @@ def api_spotify_auth_renew():
 def api_spotify_auth():
     """
     Redirect endpoint from Spotify after authentication attempt.
+    This route should be the spotify valid_uri.
     """
     code = request.args.get("code", None)
     error = request.args.get("error", None)
