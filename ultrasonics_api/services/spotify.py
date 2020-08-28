@@ -19,7 +19,7 @@ from ultrasonics_api import core
 bp = Blueprint('spotify', __name__, url_prefix="/api/spotify")
 limiter = core.limiter
 
-if os.environ.get("USE_REDIS").lower() in ["true", "1", "y", "yes"]:
+if os.environ.get("USE_REDIS") and os.environ.get("USE_REDIS").lower() in ["true", "1", "y", "yes"]:
     # Do use redis for data storage
 
     db = redis.from_url(os.environ.get("REDIS_URL"))

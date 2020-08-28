@@ -45,9 +45,9 @@ Most services require you to get an api key / secret by creating an account and 
 <br/>
 
 ### Finding API Keys
-| App     | Link                                                                                                                  | Notes                                                           |
-| ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Spotify | [https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account) | Refer to "Set Up Your Account" and "Register Your Application". |
+|App|Link|Notes|
+|---|---|---|
+|Spotify|[https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account)|Refer to "Set Up Your Account" and "Register Your Application".|
  
 <br/>
 
