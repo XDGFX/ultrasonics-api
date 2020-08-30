@@ -76,33 +76,33 @@ def auth_headers():
     return auth_headers
 
 
-@bp.route('/<path:subpath>', methods=["GET", "POST", "PUT", "DELETE"])
-def api_spotify(subpath):
-    """
-    Spotify api proxy. Adds an app client secret key to all requests.
-    If error 401 is returned, the access token must be renewed.
-    """
-    # TODO implement some logic to only allow certain subpaths
+# @bp.route('/<path:subpath>', methods=["GET", "POST", "PUT", "DELETE"])
+# def api_spotify(subpath):
+#     """
+#     Spotify api proxy. Adds an app client secret key to all requests.
+#     If error 401 is returned, the access token must be renewed.
+#     """
+#     # TODO implement some logic to only allow certain subpaths
 
-    base_url = "https://api.spotify.com/"
-    url = base_url + subpath
-    method = request.method
-    params = {**request.values.to_dict()}
+#     base_url = "https://api.spotify.com/"
+#     url = base_url + subpath
+#     method = request.method
+#     params = {**request.values.to_dict()}
 
-    if method == "GET":
-        r = requests.get(url=url, params=params)
-    elif method == "POST":
-        r = requests.post(url=url, params=params)
-    elif method == "PUT":
-        r = requests.put(url=url, params=params)
-    elif method == "DELETE":
-        r = requests.delete(url=url, params=params)
+#     if method == "GET":
+#         r = requests.get(url=url, params=params)
+#     elif method == "POST":
+#         r = requests.post(url=url, params=params)
+#     elif method == "PUT":
+#         r = requests.put(url=url, params=params)
+#     elif method == "DELETE":
+#         r = requests.delete(url=url, params=params)
 
-    return r.json()
+#     return r.json()
 
 
 @bp.route('/auth/request')
-# @limiter.limit("2 per day")
+@limiter.limit("2 per day")
 def api_spotify_auth_request():
     """
     Requests authorisation from the Spotify API.

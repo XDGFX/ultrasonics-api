@@ -27,6 +27,7 @@ def create_app():
     app.url_map.strict_slashes = False
 
     limiter = core.limiter
+    limiter.init_app(app)
 
     # Register all services
     app.register_blueprint(spotify.bp)
@@ -37,22 +38,25 @@ def create_app():
         """
         Clear any trailing '/' on path names.
         """
-        rp = request.path 
+        rp = request.path
         if rp != '/' and rp.endswith('/'):
             return redirect(rp[:-1])
-    
+
     @app.route('/api')
     def index():
         """
         General information about the api.
         """
-        import os, re
-        
+        import os
+        import re
+
         # Return files in services folder with .py extension, with '.py' removed
-        supported_services = [module[0:-3] for module in os.listdir("ultrasonics_api/services") if re.match("([\w\W]+)\.py$", module)]
-        
+        supported_services = [module[0:-3] for module in os.listdir(
+            "ultrasonics_api/services") if re.match("([\w\W]+)\.py$", module)]
+
         return jsonify({
             "name": "ultrasonics_api",
+            "description": "Welcome to the official ultrasonics_api! You can use this endpoint in your ultrasonics instance to allow connection to all the supported services listed below. Please note, rate limits apply to this api, so if you receive a 429 error, just try again later 🪂.",
             "supported services": supported_services
         })
 
