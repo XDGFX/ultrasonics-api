@@ -11,7 +11,7 @@ This is the source code for the ultrasonics-api proxy server. It's purpose is to
 ## **Option 0:** Use the official hosted `ultrasonics-api`.
 
 There is an official hosted version at [https://ultrasonics-api.herokuapp.com/api/](https://ultrasonics-api.herokuapp.com/api/).
-Feel free to use that instead of hosting your own version. Therefore, no setup is required, and you can get started on curating your perfect playlistys. Or you can run it yourself, it's up to you 😊.
+Feel free to use that instead of hosting your own version. Therefore, no setup is required, and you can get started on curating your perfect playlists. Or you can run it yourself, it's up to you 😊.
 
 <br/>
 
@@ -24,14 +24,41 @@ You can set up environment variables according to the [official documentation](h
 
 <br/>
 
-## **Option 2:** Host ultrasonics-api on your own hardware (or a virtual machine).
+## **Option 2:** Use the official docker image.
+Either make the image using the `Dockerfile`, or pull from the official repo: `XDGFX/ultrasonics-api`.
+
+Recommended usage: `docker-compose`
+```yaml
+version: "3.7"
+services:
+  ultrasonics-api:
+    image: xdgfx/ultrasonics-api
+    container_name: ultrasonics-api
+    restart: unless-stopped
+
+    ports:
+      - 8003:8003
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - FLASK_APP=ultrasonics_api
+      - USE_REDIS=False
+
+      - SPOTIFY_CLIENT_ID=abc
+      - SPOTIFY_CLIENT_SECRET=xyz
+```
+
+<br/>
+
+## **Option 3:** Host ultrasonics-api on your own hardware (or a virtual machine).
 > Disclaimer: I have only tested this on Linux 🐧. It should work fine on macOS or Windows, but some steps might be different.
 1. Clone the repo to your computer.
 2. I would recommend creating a virtual environment (`python3 -m venv .venv` to create an environment in the folder `.venv`, then activate it with `source .venv/bin/activate`). 
 3. Install the Python dependencies with `pip3 install -r requirements.txt`.
-4a. Create a .env file, and fill it with the required environment variables. See [environment variables](#environment-variables).
-4b. You can run your own Redis instance and connect to it, but if you're not threaded you might as well disable it with `USE_REDIS = False` for a cleaner install.
-5. Run it with `flask run`. You may prefer to [run it as a service](https://blog.miguelgrinberg.com/post/running-a-flask-application-as-a-service-with-systemd).
+4. Create a .env file, and fill it with the required environment variables. See [environment variables](#environment-variables).
+5. You can run your own Redis instance and connect to it, but if you're not threaded you might as well disable it with `USE_REDIS = False` for a cleaner install.
+6. Run it by executing `app.sh`. You may prefer to [run it as a service instead](https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6).
 
 <br/>
 
@@ -45,9 +72,9 @@ Most services require you to get an api key / secret by creating an account and 
 <br/>
 
 ### Finding API Keys
-|App|Link|Notes|
-|---|---|---|
-|Spotify|[https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account)|Refer to "Set Up Your Account" and "Register Your Application".|
+| App     | Link                                                                                                                  | Notes                                                           |
+| ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Spotify | [https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account) | Refer to "Set Up Your Account" and "Register Your Application". |
  
 <br/>
 
