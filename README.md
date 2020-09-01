@@ -1,4 +1,4 @@
-![](.github/ultrasonics-api-logo.svg)
+![](https://raw.githubusercontent.com/XDGFX/ultrasonics/master/ultrasonics/static/images/logo.svg)
 
 ---
 
@@ -42,8 +42,6 @@ services:
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
-      - FLASK_APP=ultrasonics_api
-      - USE_REDIS=False
 
       - SPOTIFY_CLIENT_ID=abc
       - SPOTIFY_CLIENT_SECRET=xyz
