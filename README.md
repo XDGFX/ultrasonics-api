@@ -16,6 +16,11 @@ Feel free to use that instead of hosting your own version. Therefore, no setup i
 <br/>
 
 ## **Option 1:** Host your own Heroku instance.
+Just click the button below! Make sure you refer to [environment variables](#environment-variables).
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+Or do it manually 😉:
 Follow the [official instructions](https://devcenter.heroku.com/articles/git#creating-a-heroku-remote) after cloning this repo. You will need to use the environment variable `USE_REDIS=True` and also set up a [Heroku Redis instance](https://devcenter.heroku.com/articles/heroku-redis).
 
 🌤️ This is actually a lot easier than those tutorials appear on first glance, you just need to create them both and get the correct URLs.
