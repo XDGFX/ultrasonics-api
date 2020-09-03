@@ -2,7 +2,7 @@
     "name": "ultrasonics-api",
     "description": "The official api proxy for ultrasonics. Do more with your music.",
     "repository": "https://github.com/XDGFX/ultrasonics-api",
-    "logo": "https://raw.githubusercontent.com/XDGFX/ultrasonics/master/ultrasonics/static/images/logo.svg",
+    "logo": "https://raw.githubusercontent.com/XDGFX/ultrasonics/master/ultrasonics/static/images/logo-icon.svg",
     "keywords": [
         "python",
         "api",
