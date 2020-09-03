@@ -1,0 +1,40 @@
+{
+    "name": "ultrasonics-api",
+    "description": "The official api proxy for ultrasonics. Do more with your music.",
+    "repository": "https://github.com/XDGFX/ultrasonics-api",
+    "logo": "https://raw.githubusercontent.com/XDGFX/ultrasonics/master/ultrasonics/static/images/logo.svg",
+    "keywords": [
+        "python",
+        "api",
+        "proxy"
+    ],
+    "addons": [
+        {
+            "plan": "heroku-redis"
+        }
+    ],
+    "env": {
+        "FLASK_APP": {
+            "description": "Which application to run.",
+            "required": true,
+            "value": "ultrasonics_api"
+        },
+        "USE_REDIS": {
+            "description": "Required for Heroku deployments.",
+            "required": true,
+            "value": "true"
+        },
+        "REDIS_URL": {
+            "description": "You will need to add this once the Redis addon is deployed.",
+            "required": false
+        },
+        "SPOTIFY_CLIENT_ID": {
+            "description": "Spotify: https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app",
+            "required": false
+        },
+        "SPOTIFY_CLIENT_SECRET": {
+            "description": "Spotify: https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app",
+            "required": false
+        }
+    }
+}
