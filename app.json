@@ -13,6 +13,11 @@
             "plan": "heroku-redis"
         }
     ],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
     "env": {
         "FLASK_APP": {
             "description": "Which application to run.",
