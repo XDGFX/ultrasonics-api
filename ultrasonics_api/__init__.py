@@ -16,6 +16,7 @@ from flask import Flask, jsonify, redirect, request
 
 from ultrasonics_api import core
 from ultrasonics_api.services import spotify
+from ultrasonics_api.tools import api_key
 
 
 def create_app():
@@ -31,6 +32,18 @@ def create_app():
 
     # Register all services
     app.register_blueprint(spotify.bp)
+
+    # Add auth middleware if requested
+    @app.before_request
+    def check_api_auth():
+        if os.environ.get('REQUIRE_API_AUTH') == "True" or False:
+            print("Checking")
+
+            if request.values.get("ultrasonics_auth_hash") != api_key.get_hash():
+                return "Invalid auth hash received.", 403
+
+        else:
+            print("not checking")
 
     # Setup general routes and handlers
     @app.before_request
