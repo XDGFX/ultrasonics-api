@@ -3,9 +3,140 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ultrasonics-api</title>
+    <meta name="description" content="do more with your music">
+    <meta name="author" content="Callum Morrison">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap">
+
+    <style>
+        :root {
+            --primary-1: #1ce5b5;
+            --primary-2: #e234ce;
+            --dark: #111111;
+            --grey: #b5b5b5;
+            --grey-dark: #4a4a4a;
+            --grey-darker: #171717;
+        }
+
+        .p1 {
+            color: var(--primary-1);
+        }
+
+        .p2 {
+            color: var(--primary-2);
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace !important;
+            background-color: var(--dark);
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            margin: 0 0 10vh 0;
+            text-align: center;
+            width: 100vw;
+        }
+
+        .container {
+            /* vertical-align: middle; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-flow: column;
+        }
+
+        .lds-ellipsis {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-ellipsis div {
+            position: absolute;
+            top: 33px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--primary-1);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .lds-ellipsis div:nth-child(1) {
+            left: 8px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(2) {
+            left: 8px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(3) {
+            left: 32px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(4) {
+            left: 56px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(24px, 0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h2>redirecting back to ultrasonics ⏎</h2>
+    </div>
+
     <script>
         window.opener.postMessage('{{ data }}', window.opener.origin);
     </script>
-</head>
+
+</body>
 
 </html>
