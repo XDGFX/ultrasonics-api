@@ -134,7 +134,7 @@
     </div>
 
     <script>
-        window.opener.postMessage('{{ data }}', "*");
+        window.opener.postMessage(btoa('{{ data|safe }}'), "*");
     </script>
 
 </body>
