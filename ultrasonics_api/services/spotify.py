@@ -12,7 +12,7 @@ from urllib.parse import urlencode
 
 import redis
 import requests
-from flask import Blueprint, Response, jsonify, redirect, request
+from flask import Blueprint, Response, jsonify, redirect, request, render_template
 
 from ultrasonics_api import core
 
@@ -176,4 +176,4 @@ def api_spotify_auth():
 
     r = requests.post(url=url, data=data, headers=auth_headers())
 
-    return r.text
+    return render_template("auth_return.html", data=r.text)
