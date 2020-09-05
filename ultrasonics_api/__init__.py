@@ -39,7 +39,7 @@ def create_app():
         if os.environ.get('REQUIRE_API_AUTH') == "True" or False:
             print("Checking")
 
-            if request.values.get("ultrasonics_auth_hash") != api_key.get_hash():
+            if request.values.get("ultrasonics_auth_hash") not in api_key.get_hash(False):
                 return "Invalid auth hash received.", 403
 
         else:
