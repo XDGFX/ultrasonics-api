@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/XDGFX/ultrasonics/master/ultrasonics/static/images/logo.svg)
+![](https://raw.githubusercontent.com/XDGFX/ultrasonics-api/master/.github/ultrasonics-api-logo.svg)
 
 ---
 
