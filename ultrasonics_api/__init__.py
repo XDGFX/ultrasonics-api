@@ -38,13 +38,8 @@ def create_app():
     @app.before_request
     def check_api_auth():
         if os.environ.get('REQUIRE_API_AUTH') == "True" or False:
-            print("Checking")
-
             if request.values.get("ultrasonics_auth_hash") not in api_key.get_hash(False):
                 return "Invalid auth hash received.", 403
-
-        else:
-            print("not checking")
 
     # Setup general routes and handlers
     @app.before_request

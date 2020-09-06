@@ -45,12 +45,12 @@ def api_lastfm():
     params = {**request.values.to_dict()}
     params["api_key"] = os.environ.get('LASTFM_API_KEY')
     headers = {
-        "User-Agent": "ultrasonics-api",
+        "User-Agent": "xdgfx/ultrasonics-api",
     }
 
     r = requests.get(url=url, params=params, headers=headers)
 
-    return r.json()
+    return r
 
 
 @bp.route('/auth/request')
