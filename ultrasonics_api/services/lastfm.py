@@ -50,4 +50,4 @@ def api_lastfm():
 
     r = requests.get(url=url, params=params, headers=headers)
 
-    return r.text()
+    return r.text
