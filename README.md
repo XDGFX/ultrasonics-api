@@ -50,6 +50,8 @@ services:
 
       - SPOTIFY_CLIENT_ID=abc
       - SPOTIFY_CLIENT_SECRET=xyz
+
+      - LASTFM_API_KEY=abc
 ```
 
 <br/>
@@ -78,7 +80,8 @@ Most services require you to get an api key / secret by creating an account and 
 | App     | Link                                                                                                                  | Notes                                                           |
 | ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | Spotify | [https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account) | Refer to "Set Up Your Account" and "Register Your Application". |
- 
+| Last.fm | [https://www.last.fm/api](https://www.last.fm/api/account/create)                                                     |                                                                 |
+
 <br/>
 
 ### `.env` file
@@ -90,4 +93,6 @@ REDIS_URL=[Only if USE_REDIS=True]
 
 SPOTIFY_CLIENT_ID=abc
 SPOTIFY_CLIENT_SECRET=xyz
+
+LASTFM_API_KEY=abc
 ```

@@ -40,6 +40,10 @@
         "SPOTIFY_CLIENT_SECRET": {
             "description": "Spotify: https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app",
             "required": false
+        },
+        "LASTFM_API_KEY": {
+            "description": "Last.fm: https://www.last.fm/api/account/create",
+            "required": false
         }
     }
 }
