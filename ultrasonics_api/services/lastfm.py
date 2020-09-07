@@ -8,11 +8,9 @@ XDGFX, 2020
 """
 
 import os
-from urllib.parse import urlencode
 
-import redis
 import requests
-from flask import Blueprint, Response, jsonify, redirect, request, render_template
+from flask import Blueprint, request
 
 from ultrasonics_api import core
 
@@ -20,23 +18,8 @@ bp = Blueprint('lastfm', __name__, url_prefix="/api/lastfm")
 limiter = core.limiter
 
 
-def auth_headers():
-    """
-    Encode client_id and client_secret into required authorisation header.
-    """
-    import base64
-    data_string = os.environ.get(
-        'SPOTIFY_CLIENT_ID') + ":" + os.environ.get('SPOTIFY_CLIENT_SECRET')
-    data_bytes = data_string.encode()
-    data_encoded = base64.urlsafe_b64encode(data_bytes)
-    auth_headers = {
-        "Authorization": f"Basic {data_encoded.decode()}"
-    }
-
-    return auth_headers
-
-
 @bp.route('/', methods=["GET"])
+@limiter.limit("20 per second;200 per minute")
 def api_lastfm():
     """
     Last.fm api proxy. Adds an api key to all requests.
