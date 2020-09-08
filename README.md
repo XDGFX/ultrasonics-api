@@ -51,7 +51,10 @@ services:
       - SPOTIFY_CLIENT_ID=abc
       - SPOTIFY_CLIENT_SECRET=xyz
 
-      - LASTFM_API_KEY=abc
+      - LASTFM_API_KEY=xyz
+
+      - DEEZER_APP_ID=abc
+      - DEEZER_APP_SECRET=xyz
 ```
 
 <br/>
@@ -81,7 +84,7 @@ Most services require you to get an api key / secret by creating an account and 
 | ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | Spotify | [https://developer.spotify.com](https://developer.spotify.com/documentation/web-api/quick-start/#set-up-your-account) | Refer to "Set Up Your Account" and "Register Your Application". |
 | Last.fm | [https://www.last.fm/api](https://www.last.fm/api/account/create)                                                     |                                                                 |
-
+| Deezer  | [https://developers.deezer.com/myapps/](https://developers.deezer.com/myapps/)                                        |                                                                 |
 <br/>
 
 ### `.env` file
@@ -95,4 +98,7 @@ SPOTIFY_CLIENT_ID=abc
 SPOTIFY_CLIENT_SECRET=xyz
 
 LASTFM_API_KEY=abc
+
+DEEZER_APP_ID=abc
+DEEZER_APP_SECRET=xyz
 ```

@@ -44,6 +44,14 @@
         "LASTFM_API_KEY": {
             "description": "Last.fm: https://www.last.fm/api/account/create",
             "required": false
+        },
+        "DEEZER_APP_ID": {
+            "description": "Deezer: https://developers.deezer.com/myapps/",
+            "required": false
+        },
+        "DEEZER_APP_SECRET": {
+            "description": "Deezer: https://developers.deezer.com/myapps/",
+            "required": false
         }
     }
 }
