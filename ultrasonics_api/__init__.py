@@ -15,7 +15,7 @@ import os
 from flask import Flask, jsonify, redirect, request
 
 from ultrasonics_api import core
-from ultrasonics_api.services import lastfm, spotify, soundcloud
+from ultrasonics_api.services import deezer, lastfm, soundcloud, spotify
 from ultrasonics_api.tools import api_key
 
 
@@ -32,6 +32,7 @@ def create_app():
 
     # Register all services
     app.register_blueprint(spotify.bp)
+    app.register_blueprint(deezer.bp)
     app.register_blueprint(lastfm.bp)
     app.register_blueprint(soundcloud.bp)
 
