@@ -34,23 +34,23 @@
             "required": false
         },
         "SPOTIFY_CLIENT_ID": {
-            "description": "Spotify: https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app",
+            "description": "Client ID for Spotify",
             "required": false
         },
         "SPOTIFY_CLIENT_SECRET": {
-            "description": "Spotify: https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app",
+            "description": "Client secret for Spotify",
             "required": false
         },
         "LASTFM_API_KEY": {
-            "description": "Last.fm: https://www.last.fm/api/account/create",
+            "description": "API key for Last.fm",
             "required": false
         },
         "DEEZER_APP_ID": {
-            "description": "Deezer: https://developers.deezer.com/myapps/",
+            "description": "App ID for Deezer",
             "required": false
         },
         "DEEZER_APP_SECRET": {
-            "description": "Deezer: https://developers.deezer.com/myapps/",
+            "description": "App secret for Deezer",
             "required": false
         }
     }
