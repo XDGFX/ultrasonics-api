@@ -77,7 +77,8 @@ def api_deezer_auth_request():
         "perms": ",".join([
             "basic_access",
             "offline_access",
-            "manage_library"
+            "manage_library",
+            "delete_library"
         ])
     }
 
