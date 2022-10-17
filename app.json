@@ -41,6 +41,10 @@
             "description": "Client secret for Spotify",
             "required": false
         },
+        "SPOTIFY_REDIRECT_URI": {
+            "description": "Redirect URI for Spotify",
+            "required": false
+        },
         "LASTFM_API_KEY": {
             "description": "API key for Last.fm",
             "required": false
@@ -51,6 +55,10 @@
         },
         "DEEZER_APP_SECRET": {
             "description": "App secret for Deezer",
+            "required": false
+        },
+	"DEEZER_REDIRECT_URI": {
+            "description": "Redirect URI for Deezer",
             "required": false
         }
     }

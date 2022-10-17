@@ -89,7 +89,7 @@ def api_spotify_auth_request():
     params = {
         "client_id": os.environ.get('SPOTIFY_CLIENT_ID'),
         "response_type": "code",
-        "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify/auth",
+        "redirect_uri": os.environ.get('SPOTIFY_REDIRECT_URI'),
         "state": str(uuid4()),
         "scope": " ".join([
             "playlist-modify-public",
@@ -147,7 +147,7 @@ def api_spotify_auth():
     data = {
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/spotify/auth"
+        "redirect_uri": os.environ.get('SPOTIFY_REDIRECT_URI')
     }
 
     r = requests.post(url=url, data=data, headers=auth_headers())
