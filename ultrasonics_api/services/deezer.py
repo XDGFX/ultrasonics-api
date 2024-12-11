@@ -72,7 +72,7 @@ def api_deezer_auth_request():
 
     params = {
         "app_id": os.environ.get('DEEZER_APP_ID'),
-        "redirect_uri": "https://ultrasonics-api.herokuapp.com/api/deezer/auth",
+        "redirect_uri": f"{os.environ.get('REDIRECT_URI')}/api/deezer/auth",
         "state": str(uuid4()),
         "perms": ",".join([
             "basic_access",

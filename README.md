@@ -55,6 +55,8 @@ services:
 
       - DEEZER_APP_ID=abc
       - DEEZER_APP_SECRET=xyz
+
+      - REDIRECT_URI=http://<your server's local IP>:8003
 ```
 
 <br/>
@@ -101,4 +103,6 @@ LASTFM_API_KEY=abc
 
 DEEZER_APP_ID=abc
 DEEZER_APP_SECRET=xyz
+
+REDIRECT_URI=http://<your server's local IP>:8003
 ```
