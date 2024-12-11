@@ -50,11 +50,14 @@ services:
 
       - SPOTIFY_CLIENT_ID=abc
       - SPOTIFY_CLIENT_SECRET=xyz
+      - SPOTIFY_REDIRECT_URI=https://ultrasonics-api.herokuapp.com/api/spotify/auth
 
       - LASTFM_API_KEY=xyz
 
       - DEEZER_APP_ID=abc
       - DEEZER_APP_SECRET=xyz
+      - DEEZER_REDIRECT_URI=https://ultrasonics-api.herokuapp.com/api/deezer/auth
+
 ```
 
 <br/>
@@ -96,9 +99,11 @@ REDIS_URL=[Only if USE_REDIS=True]
 
 SPOTIFY_CLIENT_ID=abc
 SPOTIFY_CLIENT_SECRET=xyz
+SPOTIFY_REDIRECT_URI=https://ultrasonics-api.herokuapp.com/api/spotify/auth
 
 LASTFM_API_KEY=abc
 
 DEEZER_APP_ID=abc
 DEEZER_APP_SECRET=xyz
+DEEZER_REDIRECT_URI=https://ultrasonics-api.herokuapp.com/api/deezer/auth
 ```
