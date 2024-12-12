@@ -40,11 +40,7 @@
         "SPOTIFY_CLIENT_SECRET": {
             "description": "Client secret for Spotify",
             "required": false
-        },
-        "SPOTIFY_REDIRECT_URI": {
-            "description": "Redirect URI for Spotify",
-            "required": false
-        },
+        },        
         "LASTFM_API_KEY": {
             "description": "API key for Last.fm",
             "required": false
@@ -57,8 +53,8 @@
             "description": "App secret for Deezer",
             "required": false
         },
-	"DEEZER_REDIRECT_URI": {
-            "description": "Redirect URI for Deezer",
+        "REDIRECT_URI": {
+            "description": "Redirect URI, which is how your api is reachable (http://<your-server-ip>:8003)",
             "required": false
         }
     }
