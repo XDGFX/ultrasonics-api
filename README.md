@@ -8,7 +8,10 @@ This is the source code for the ultrasonics-api proxy server. It's purpose is to
 
 <br/>
 
-## **Option 0:** Use the official hosted `ultrasonics-api`.
+## **Option 0:** Use the official hosted `ultrasonics-api`.  _[DEPRECATED]_
+
+>[!IMPORTANT]
+>The official `ultrasonics-api` no longer run on Heroku. Please use one of the other options.
 
 There is an official hosted version at [https://ultrasonics-api.herokuapp.com/api/](https://ultrasonics-api.herokuapp.com/api/).
 Feel free to use that instead of hosting your own version. Therefore, no setup is required, and you can get started on curating your perfect playlists. Or you can run it yourself, it's up to you 😊.
