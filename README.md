@@ -33,14 +33,14 @@ You can set up environment variables according to the [official documentation](h
 <br/>
 
 ## **Option 2:** Use the official docker image.
-Either make the image using the `Dockerfile`, or pull from the official repo: `XDGFX/ultrasonics-api`.
+Either make the image using the `Dockerfile`, or pull from the official repo: `ghcr.io/xdgfx/ultrasonics-api`.
 
 Recommended usage: `docker-compose`
 ```yaml
 version: "3.7"
 services:
   ultrasonics-api:
-    image: xdgfx/ultrasonics-api
+    image: ghcr.io/xdgfx/ultrasonics-api
     container_name: ultrasonics-api
     restart: unless-stopped
 
@@ -58,7 +58,7 @@ services:
 
       - DEEZER_APP_ID=abc
       - DEEZER_APP_SECRET=xyz
-      
+
       - REDIRECT_URI=http://<your server's local IP>:8003
 
 ```
@@ -68,7 +68,7 @@ services:
 ## **Option 3:** Host ultrasonics-api on your own hardware (or a virtual machine).
 > Disclaimer: I have only tested this on Linux 🐧. It should work fine on macOS or Windows, but some steps might be different.
 1. Clone the repo to your computer.
-2. I would recommend creating a virtual environment (`python3 -m venv .venv` to create an environment in the folder `.venv`, then activate it with `source .venv/bin/activate`). 
+2. I would recommend creating a virtual environment (`python3 -m venv .venv` to create an environment in the folder `.venv`, then activate it with `source .venv/bin/activate`).
 3. Install the Python dependencies with `pip3 install -r requirements.txt`.
 4. Create a .env file, and fill it with the required environment variables. See [environment variables](#environment-variables).
 5. You can run your own Redis instance and connect to it, but if you're not threaded you might as well disable it with `USE_REDIS = False` for a cleaner install.
